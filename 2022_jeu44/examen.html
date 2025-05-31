@@ -46,6 +46,9 @@
 			<h3>Total : <span id="total"></span></h3>
 			<p>Jeu du 44 : bloque les cases de ton choix et pioche des jetons pour atteindre 44 !</p>
 		</section>
+		<section>
+			<p> <strong>Derniers Scores : </strong> <span id="score"></span></p>
+		</section>
 		
 		<div id="victoire">
 			<p>Victoire !</p> 
@@ -55,6 +58,7 @@
 			<p>Perdu !</p> 
 			<span class="bouton actif rejouer">Rejouer</span>
 		</div>
+
 		<script>
 
 			// Remplire les jetons avec des chifres de 1 à 9
@@ -82,13 +86,42 @@
 			}
 
 			function viderCartouche () {
-				let cartouchesVides = $('.cartouche').not('.vide');
+				let cartouches = $('.cartouche').not('.vide');
+				console.log(cartouches)
 
-				if (cartouchesVides.length-1>0) {
-					$(cartouchesVides[0]).addClass('vide');
+				if (cartouches.length-1>0) {
+					$(cartouches[0]).addClass('vide');
 				} else {
 					$('#perdu').fadeIn();
 				}
+			}
+
+			
+
+			function rejouer(resultat) {
+				$('#perdu').fadeOut();
+				$('#victoire').fadeOut();
+
+				$('.vide').each( function(i) {
+					console.log(this)
+					$(this).removeClass('vide');
+				}) 
+
+				$('.jeton').each( function(i) {
+					console.log(this)
+					$(this).addClass('libre');
+				}) 
+
+				premierTirage();
+
+				if ($('#score').text() == '') {
+					$('#score').append(parseInt($('#total').text()));
+				} else {
+					$('#score').append(', ');
+					$('#score').append(parseInt($('#total').text()));
+				}
+				sommeTirage();
+				
 			}
 
 			// Boucle principale
@@ -99,12 +132,9 @@
 					sommeTirage();
 					viderCartouche();
 					if (parseInt($('#total').text())>=44){
-						
 						$('#victoire').fadeIn();
 						$('#perdu').fadeOut();
 					};
-					
-					
 				})
 				// Tirage au demarrage 
 				premierTirage();
@@ -115,8 +145,10 @@
 				})
 				
 				$('.rejouer').on('click', function () {
-					window.location.reload();
+					rejouer();
 				})
+
+				
 
 			})
 		</script>
