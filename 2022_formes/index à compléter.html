@@ -24,13 +24,14 @@
 		
 		.triangle { clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
 		.cercle { clip-path: circle(50% at 50% 50%); }
-		.carré { clip-path: inset(5% 5% 5% 5%);}
+		.carre { clip-path: inset(5% 5% 5% 5%);}
 		.pentagone { clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);}
-		.trapèze { clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);}
-		.parallélogramme { clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%); }
+		.trapeze { clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);}
+		.parallelogramme { clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%); }
 		.losange { clip-path: polygon(50% 0%, 95% 50%, 50% 100%, 5% 50%); }
 		.octogone { clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%); }
 	</style>
+	<script src="jquery.min.js"></script>
 </head>
 <body>
 	<header id="header">
@@ -38,5 +39,68 @@
 	</header>
 	<main id="main">
 	</main>
+	<script>
+		var formes = new Array("triangle", "cercle", "carre", "pentagone", "trapeze", "parallelogramme", "losange", "octogone");
+
+		function genererFormes(mainForme) {
+			$('#main').prepend("<div class='ligne'></div>");
+			$("#laforme").text(mainForme);
+
+			for (let index = 0; index < formes.length; index++) {
+				var indexRandom = randomiser(formes.length);
+				let derniereLigne = $('.ligne').first();
+				derniereLigne.append("<span class='forme " + formes[indexRandom] + "'></span>");
+			}
+			// Inserer la main forme au moins une fois 
+			let endroit = randomiser(formes.length)
+			$(".forme").eq(endroit).replaceWith("<span class='forme " + mainForme + "'></span>");
+		}
+
+		function randomiser(max) {
+			return Math.floor(Math.random()*max)
+		}
+
+		function verifierForme(mainForme, formeCourante) {
+			if ($(formeCourante).hasClass(mainForme)){
+				$(formeCourante).addClass('goodjob');
+			}else {
+				$(formeCourante).addClass('badjob');
+			}
+		}
+		function verifierLigne(mainForme) {
+			console.log(mainForme)
+			let quantiteFormes = $("."+mainForme, $('.ligne').first()).length;
+
+			let quantiteGood = $(".goodjob", $('.ligne').first() ).length;
+
+			console.log(quantiteFormes, quantiteGood)
+
+			if (quantiteFormes==quantiteGood) {
+				return true;
+			}
+		}
+		function choisirMainForme () {
+			var mainForme = formes[randomiser(formes.length)];
+			return mainForme;
+		}
+
+		
+
+		$(function () {
+			let mainForme = choisirMainForme(); 
+			genererFormes(mainForme);
+
+			$("#main").on("click", ".forme", function () {
+				verifierForme(mainForme, this);
+
+				if (verifierLigne(mainForme)) {
+					mainForme = choisirMainForme();
+					genererFormes(mainForme);
+				}
+			});
+		});
+
+		
+	</script>
 </body>
 </html>
