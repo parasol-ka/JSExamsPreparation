@@ -18,9 +18,10 @@
 		.jeton { background-color:#111; color:#fff; border-radius:1.5rem; width:3rem; height:3rem; display:inline-flex; justify-content:center; align-items:center; cursor:pointer; user-select:none; }
 		.jeton.libre { background-color:#666; }
 		
-		#victoire { font-size:8rem; position:fixed; left:0; right:0; top:0; bottom:0; display:inline-flex; justify-content:center; align-items:center; background-color:#eaa8; display:none; user-select:none;}
-		#perdu { font-size:8rem; position:fixed; left:0; right:0; top:0; bottom:0; display:inline-flex; justify-content:center; align-items:center; background-color:#eaa8; display:none; user-select:none;}
+		#victoire { font-size:5rem; position:fixed; left:0; right:0; top:0; bottom:0; display:inline-flex; flex-direction: column; justify-content:center; align-items:center; background-color:#eaa8; display:none; user-select:none;}
+		#perdu { font-size:5rem; position:fixed; left:0; right:0; top:0; bottom:0; display:inline-flex; flex-direction: column; justify-content:center; align-items:center; background-color:#eaa8; display:none; user-select:none;}
 		</style>
+		<script src="jquery.min.js"></script> 
 	</head>
 	<body>
 		<section>
@@ -34,7 +35,7 @@
 			</div>
 		</section>
 		<section id="plateau">
-			<div class="jeton libre"></div>
+			<div class="jeton libre">1</div>
 			<div class="jeton libre"></div>
 			<div class="jeton libre"></div>
 			<div class="jeton libre"></div>
@@ -46,8 +47,78 @@
 			<p>Jeu du 44 : bloque les cases de ton choix et pioche des jetons pour atteindre 44 !</p>
 		</section>
 		
-		<div id="victoire">Victoire ! </div>
-		<div id="perdu">Perdu ! </div>
-		
+		<div id="victoire">
+			<p>Victoire !</p> 
+			<span class="bouton actif rejouer">Rejouer</span>
+		</div>
+		<div id="perdu">
+			<p>Perdu !</p> 
+			<span class="bouton actif rejouer">Rejouer</span>
+		</div>
+		<script>
+
+			// Remplire les jetons avec des chifres de 1 à 9
+			function premierTirage() {
+				$('.libre').each( function(i) {
+					this.textContent = Math.floor( Math.random()*9 + 1 );
+				}) ;
+			}
+
+			// Calculer la somme des jetons
+			function sommeTirage() {
+				total = 0
+
+				$('.jeton').each( function(i) {
+					let number = parseInt(this.textContent);
+					total += number;
+				});
+
+				$('#total').text(total);
+				return total;
+			}
+
+			function perdre() {
+				$('#perdu').fadeIn();
+			}
+
+			function viderCartouche () {
+				let cartouchesVides = $('.cartouche').not('.vide');
+
+				if (cartouchesVides.length-1>0) {
+					$(cartouchesVides[0]).addClass('vide');
+				} else {
+					$('#perdu').fadeIn();
+				}
+			}
+
+			// Boucle principale
+			$( function () {
+				// Tirage au click
+				$('#pioche').on('click', function () {
+					premierTirage();
+					sommeTirage();
+					viderCartouche();
+					if (parseInt($('#total').text())>=44){
+						
+						$('#victoire').fadeIn();
+						$('#perdu').fadeOut();
+					};
+					
+					
+				})
+				// Tirage au demarrage 
+				premierTirage();
+				sommeTirage();
+
+				$('.jeton').on('click', function () {
+					$(this).toggleClass('libre');
+				})
+				
+				$('.rejouer').on('click', function () {
+					window.location.reload();
+				})
+
+			})
+		</script>
 	</body>
 </html>
