@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Examen JS - Catalogue et Panier</title>
+    <style>
+        html {
+            background-color: #f9f9f9;
+            font-family: Tahoma, sans-serif;
+            font-size: 100%;
+            color: #333;
+            text-align: center;
+        }
+        section {
+            margin: 1rem auto;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: 0.4rem;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            margin-bottom: 0.5rem;
+        }
+        input[type="text"] {
+            font-size: 1rem;
+            padding: 0.3rem 0.6rem;
+            margin-bottom: 0.5rem;
+            width: 60%;
+            border: 1px solid #aaa;
+            border-radius: 0.3rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.5rem;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 0.5rem;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        button.ajouter {
+            padding: 0.3rem 0.6rem;
+            font-size: 1rem;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            opacity: 0.9;
+        }
+        button.ajouter:hover {
+            opacity: 1;
+            background-color: #218838;
+        }
+        #panier-summary {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        #panier-items {
+            margin-top: 0.5rem;
+            list-style: none;
+            padding-left: 0;
+        }
+        #panier-items li {
+            text-align: left;
+            margin-bottom: 0.3rem;
+        }
+        .supprimer-item {
+            color: #c00;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+    <script src="jquery.min.js"></script>
+</head>
+<body>
+
+    <!-- Section 1 : Catalogue de produits -->
+    <section id="catalogue">
+        <h2>Catalogue de Produits</h2>
+        <input type="text" id="filtre-catalogue" placeholder="Rechercher dans le catalogue…">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prix (€)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-prix="19.99">
+                    <td>T-shirt imprimé</td>
+                    <td>19,99</td>
+                    <td><button class="ajouter">Ajouter au panier</button></td>
+                </tr>
+                <tr data-prix="12.50">
+                    <td>Casquette unisexe</td>
+                    <td>12,50</td>
+                    <td><button class="ajouter">Ajouter au panier</button></td>
+                </tr>
+                <tr data-prix="29.00">
+                    <td>Jeans slim</td>
+                    <td>29,00</td>
+                    <td><button class="ajouter">Ajouter au panier</button></td>
+                </tr>
+                <tr data-prix="8.75">
+                    <td>Chaussettes (lot de 3)</td>
+                    <td>8,75</td>
+                    <td><button class="ajouter">Ajouter au panier</button></td>
+                </tr>
+                <tr data-prix="45.20">
+                    <td>Pull à col rond</td>
+                    <td>45,20</td>
+                    <td><button class="ajouter">Ajouter au panier</button></td>
+                </tr>
+                <tr data-prix="15.30">
+                    <td>Ceinture en cuir</td>
+                    <td>15,30</td>
+                    <td><button class="ajouter">Ajouter au panier</button></td>
+                </tr>
+                <tr data-prix="22.40">
+                    <td>Chaussures sport</td>
+                    <td>22,40</td>
+                    <td><button class="ajouter">Ajouter au panier</button></td>
+                </tr>
+                <tr data-prix="5.99">
+                    <td>Casquette de bain</td>
+                    <td>5,99</td>
+                    <td><button class="ajouter">Ajouter au panier</button></td>
+                </tr>
+                <tr data-prix="34.50">
+                    <td>Veste imperméable</td>
+                    <td>34,50</td>
+                    <td><button class="ajouter">Ajouter au panier</button></td>
+                </tr>
+                <tr data-prix="9.80">
+                    <td>Gants d'hiver</td>
+                    <td>9,80</td>
+                    <td><button class="ajouter">Ajouter au panier</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Section 2 : Panier -->
+    <section id="panier">
+        <h2>Votre Panier</h2>
+        <div id="panier-summary">
+            Articles dans le panier : <span id="nb-items">0</span> – Montant total : <span id="total-prix">0,00</span> €
+        </div>
+        <ul id="panier-items">
+            <!-- Les lignes d’articles ajoutés apparaîtront ici -->
+        </ul>
+    </section>
+
+    <footer>
+        Examen Front-end par Tom Deneyer - JavaScript/JQuery
+    </footer>
+
+    <script>
+        // GLHF
+    </script>
+</body>
+</html>
