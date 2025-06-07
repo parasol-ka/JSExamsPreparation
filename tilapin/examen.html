@@ -28,6 +28,7 @@
 			header#animaux div { width:18.5%; padding:3%;}
 		}
 	</style>
+	<script src="jquery.min.js"></script>
 </head>
 <body>
 	<header id="animaux">
@@ -49,7 +50,57 @@
 	</header>
 		
 	<main id="main">
+		
 	</main>
-	
+
+	<script>
+		function randomizerCompteur() {
+			let compteurRandom = Math.floor(Math.random()*4+1)
+			return compteurRandom
+		}
+		function remplirCompteurs() {
+			$('.bouton span').each( function(index) {
+				let compteur = randomizerCompteur();
+				$(this).text(compteur);
+			});
+		}
+		function calculerTotal() {
+			let total = 0;
+			$('.bouton span').each( function(index) {
+				total += parseInt($(this).text())
+			})
+			return total;
+		}
+		function diminuerCompteur() {
+			$("#total span").text(parseInt($("#total span").text())-1);
+		}
+		// Au chargement on remplit des compteur et on affiche le total 
+		$( function () { 
+			remplirCompteurs();
+			$("#total span").text(calculerTotal())
+			$("#total").removeClass('vide');
+		});
+
+		$('.bouton').on('click', function (){
+			if (parseInt($("span", this).text()) > 1) {
+				let animal = $("img", this).attr("src");
+				$('#main').append(`<img src='${animal}' alt=''>`);
+				$("span", this).text(parseInt($("span", this).text())-1);
+				diminuerCompteur();
+			}else if ((parseInt($("span", this).text()) == 1)){
+				let animal = $("img", this).attr("src");
+				$('#main').append(`<img src='${animal}' alt=''>`);
+				$("span", this).text(0);
+				$(this).addClass('vide');
+				diminuerCompteur();
+			}else {
+				$(this).addClass('vide');
+			}
+			if (parseInt($("#total span").text())==0) {
+				$("#total").addClass('vide');
+				console.log('ici')
+			}
+		})
+	</script>
 </body>
 </html>
