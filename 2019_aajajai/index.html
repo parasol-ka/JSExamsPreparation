@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam</title>
+    <style>
+        body {background-color: rgb(52, 45, 119); height: 100vh; margin: 0; font-family: 'calibri';}
+        #cases { margin-top: 2rem; display: flex; justify-content: center; column-gap: 2rem;}
+        .case {background-color: white; width: 3rem; height: 3rem; cursor: pointer;}
+        .case:active {background-color: rgb(171, 76, 76);}
+        .complet {background-color: green !important;}
+        #lettres {width: 100%; height: max-content;} 
+        .lettre {transition: all ease-in-out 0.3s; background-color: grey; position: absolute; width: 3rem; height: 3rem; cursor: pointer; color: white; 
+                text-align: center; font-size: 3rem; display: flex; align-items: center; justify-content: center; user-select: none;} 
+        .noir {background-color: black !important; }
+    </style>
+    <script src="jquery.min.js"></script>
+</head>
+<body>
+    <main>
+        <div id="cases">
+            <span class="case"></span>
+            <span class="case"></span>
+            <span class="case"></span>
+            <span class="case"></span>
+            <span class="case"></span>
+            <span class="case"></span>
+            <span class="case"></span>
+            <span class="case"></span>
+            <span class="case"></span>
+            <span class="case"></span>
+        </div>
+        <div id="lettres">
+        </div>
+    </main>
+    <script>
+        function randomizerPosition() {
+            let maxLeft = $(window).width()-50;
+            let maxTop = $(window).height()-100;
+            let leftRandom = Math.floor(Math.random() * (maxLeft - 100 + 1)) + 100;
+            let topRandom = Math.floor(Math.random() * (maxTop - 100 + 1)) + 100;
+            return {"top" : topRandom, "left" : leftRandom};
+        }
+        function placerLettres() {
+            let lettres = ["a", "a", "i", "s", "c", "j", "v", "t", "r", "p"];
+            while (lettres.length > 0) {
+                let indexRandom = Math.floor(Math.random() * lettres.length);
+                $('#lettres').append(`<span class="lettre" style='display: none;'>${lettres[indexRandom]}</span>`);
+                lettres.splice(indexRandom, 1);
+            }
+        }
+        $( function () {
+            $('#lettres').html("");
+            placerLettres();
+            $('.lettre').each( function (index) {
+                $(this).css("top", randomizerPosition().top);
+                $(this).css("left", randomizerPosition().left);
+                $(this).fadeIn(600);
+            })
+        })
+        let bonMot = new Array("j", "a", "v", "a", "s", "c", "r", "i", "p", "t")
+        $(document).on('click', ".lettre", function () {
+            $('.lettre').removeClass('noir');
+            $(this).addClass('noir');
+            console.log($(this).text(), bonMot[0])
+            if ($(this).text()==bonMot[0]) {
+                let directionLeft = $('.case:not(.remplie)').first().position().left;
+                let directionTop = $('.case:not(.remplie)').first().position().top;
+                $(this).css({top: directionTop, left: directionLeft});
+                bonMot.shift();
+                $('.case:not(.remplie)').first().addClass('remplie');
+                if (bonMot.length==0) {
+                    $('.lettre').removeClass('noir');
+                    $('.lettre').addClass('complet');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
