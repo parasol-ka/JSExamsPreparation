@@ -84,7 +84,6 @@
     <script src="jquery.min.js"></script>
 </head>
 <body>
-
     <!-- Section 1 : Catalogue de produits -->
     <section id="catalogue">
         <h2>Catalogue de Produits</h2>
@@ -151,7 +150,6 @@
             </tbody>
         </table>
     </section>
-
     <!-- Section 2 : Panier -->
     <section id="panier">
         <h2>Votre Panier</h2>
@@ -162,13 +160,74 @@
             <!-- Les lignes d’articles ajoutés apparaîtront ici -->
         </ul>
     </section>
-
     <footer>
         Examen Front-end par Tom Deneyer - JavaScript/JQuery
     </footer>
-
     <script>
-        // GLHF
+        let selectedItems = {};
+        function sumSimilarItems(selectedItem) {
+            let sumItem = 0;
+            console.log(selectedItems)
+            for (item of selectedItems) {
+                if (selectedItem == item) {
+                sumItem += 1;
+                }
+            }
+            return sumItem;
+        }
+        function generateItems() {
+            let x = '';
+            for (item in selectedItems) {
+                x +=`<li>${item} - ${selectedItems[item][1]}€ (${selectedItems[item][0]}x)</li>`;
+                console.log(x);
+            }
+            return x
+        }
+        function calculateTotalItems() {
+            let totalItems = 0;
+            for (item in selectedItems) {
+                totalItems += selectedItems[item][0];
+            }
+            return totalItems
+        }
+        function calculateTotalPrice() {
+            let totalPrice= 0;
+            for (item in selectedItems) {
+                let totalItemPrice = parseInt(selectedItems[item][0]) * parseFloat(selectedItems[item][1]);
+                totalPrice += totalItemPrice
+            }
+            return totalPrice
+        }
+        $('.ajouter').on('click', function () {
+            let parentTr = this.parentElement.parentElement;
+            let firstChildTd = $(parentTr).first();
+            let selectedItem = parentTr.children[0].innerText; 
+            let selectedItemPrice = parentTr.children[1].innerText;
+            selectedItemPrice = selectedItemPrice.replace(',', '.');
+            console.log(selectedItemPrice)
+            
+            if (selectedItems[selectedItem] ) {
+                selectedItems[selectedItem][0] +=1 ;
+            }else {
+                selectedItems[selectedItem] = [1, selectedItemPrice];
+            }
+            $('#panier-items').html(generateItems());
+            $('#nb-items').text(calculateTotalItems());
+            $('#total-prix').text(calculateTotalPrice());
+        })
+            // FAIRE UN FOR
+        $('#filtre-catalogue').on("input", function () {
+            $("td").each( function() {
+                if (this.innerText.includes($('#filtre-catalogue').val())) {
+                    console.log($(this).parent())
+                    // $(this).parent().css("display", "none");
+                }
+                
+                
+                
+            })
+        })
+        
     </script>
 </body>
 </html>
