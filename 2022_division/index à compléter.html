@@ -19,6 +19,7 @@
 	.case:hover { background-color:#fec; }
 	.case.moiaussi { background-color:#fec; }
 	</style>
+	<script src="jquery.min.js"></script>
 </head>
 <body>
 	<main id="main">
@@ -33,5 +34,77 @@
 		<div id="grille">
 		</div>
 	</main>
+	<script>
+		let nombresPremiers = new Array(2, 3, 5, 7);
+		let diviseurs = new Array();
+		let widthMax = $('#metre').width();
+
+		function remplirCases() {
+			for (let i = 0; i < 81; i++) {
+				let nombre = genererNombre();
+				$('#grille').append(`<span class="case">${nombre}</span>`)
+			}
+		}
+		function genererNombre() {
+			let nombreRandom1 = Math.floor(Math.random()*7+1)
+			let nombreRandom2 = Math.floor(Math.random()*7+1)
+			return nombreRandom1*nombreRandom2
+		}
+		function testerDivision(nombre) {
+			for (const nombrePr of nombresPremiers) {
+				if (nombre%nombrePr==0)  {
+					diviseurs.push(nombrePr);
+				}
+			}
+		}
+		function allumerVoyants(){
+			$('.voyant').each( function () {
+				$(this).removeClass('vert')
+				for (const diviseur of diviseurs) {
+					if (parseInt($(this).text())==diviseur) {
+						$(this).addClass('vert')
+					}
+				}
+			})
+			$('#nb').text(diviseurs.length);
+		}
+		function allumerMemesCases(nombre) {
+			$('.case').each(function() {
+				if ($(this).text()==nombre){
+					$(this).addClass('moiaussi');
+				} else {
+					$(this).removeClass('moiaussi');
+				}
+			})
+		}
+		function ajusterMeter() {
+			let partieMax = nombresPremiers.length;
+			let partieActuelle = diviseurs.length;
+			let pourcentage = (partieActuelle*100)/partieMax;
+			let width = widthMax*pourcentage/100;
+			$('#metre').animate({ width: width}, 200);
+		}
+		//On load
+		$( function() {
+			remplirCases();
+			$('#metre').width(0);
+		})
+		// Events
+		$(document).on('mouseenter', '.case', function () {
+			testerDivision($(this).text());
+			allumerVoyants();
+			ajusterMeter();
+			allumerMemesCases($(this).text());
+		})
+		$(document).on('mouseleave', '.case', function () {
+			$('.voyant').removeClass('vert');
+			$('.case').removeClass('moiaussi');
+			$('#nb').text(0);
+			diviseurs = Array();
+		})
+		$('#grille').on('mouseleave', function() {
+			$('#metre').animate({ width: 0}, 200);
+		})
+	</script>
 </body>
 </html>
