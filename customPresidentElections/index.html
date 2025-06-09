@@ -34,10 +34,71 @@
         <p id="totalVotes">Nombre de votes restant: <span class='vote_left'>1</span>/<span class='vote_tot'>1</span></p>
         <div id="winner"></div>
     </div>
-
     <script>
+        // Global variables
+        let nombreVotes = 0;
+        let votesRestants = 0;
+
+        function randomizerNombreVotes() {
+            nombreVotes = Math.floor(Math.random()*(10+1)+10);
+            votesRestants = nombreVotes;
+            return nombreVotes;
+        }
+        function incrementerVotes(candidat) {
+            let votesCourants = parseInt($('.votes', candidat).text());
+            votesRestants = votesRestants - 1;
+            $('.votes', candidat).text(votesCourants+1);
+        }
+        function calculerPourcentage(candidat) {
+            let votesCourants = parseInt($('.votes', candidat).text());
+            let pourcentage = (votesCourants*100)/nombreVotes;
+            return pourcentage.toFixed(2);
+        }
+        function updateMeter(candidat) {
+            $('.vote-meter', candidat).attr('max', nombreVotes);
+            $('.vote-meter', candidat).attr('value', parseInt($('.votes', candidat).text()));
+        }
+        function selectionerPresident() {
+            let gagnants = new Array();
+            let maximum = 0;
+            $('.candidate .value').each(function () {
+                let votes = parseFloat($(this).text())
+                if ((votes > maximum) && (gagnants.length==0)){
+                    maximum = votes;
+                    gagnants.push($(this).parent().parent().attr("data-name"));
+                } else if ((votes > maximum) && (gagnants.length>0)){
+                    maximum = votes;
+                    gagnants.pop();
+                    gagnants.push($(this).parent().parent().attr("data-name"));
+                } else if ((votes == maximum) && (gagnants.length>0)){
+                    gagnants.push($(this).parent().parent().attr("data-name"));
+                }
+            });
+            console.log(gagnants.join(', '))
+            console.log(gagnants)
+            $('#winner').text(gagnants.join(', '))
+        }
+
+        // On page load
+        $( function () {
+            $('.vote_tot, .vote_left').text(randomizerNombreVotes());
+        })
+        // Events
+        $('.candidate').on('click', function () {
+            if (votesRestants>1) {
+                incrementerVotes($(this));
+                updateMeter($(this))
+                $('.vote_left').text(votesRestants);
+                $('.percentage .value', this).text(calculerPourcentage($(this)))
+            } else if (votesRestants == 1){
+                incrementerVotes($(this));
+                updateMeter($(this))
+                $('.vote_left').text(votesRestants);
+                $('.percentage .value', this).text(calculerPourcentage($(this)))
+                selectionerPresident();
+            }
+        })
         
     </script>
-
 </body>
 </html>
