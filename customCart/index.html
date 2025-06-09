@@ -196,7 +196,7 @@
                 let totalItemPrice = parseInt(selectedItems[item][0]) * parseFloat(selectedItems[item][1]);
                 totalPrice += totalItemPrice
             }
-            return totalPrice
+            return totalPrice.toFixed(2)
         }
         $('.ajouter').on('click', function () {
             let parentTr = this.parentElement.parentElement;
@@ -215,16 +215,14 @@
             $('#nb-items').text(calculateTotalItems());
             $('#total-prix').text(calculateTotalPrice());
         })
-            // FAIRE UN FOR
+        
         $('#filtre-catalogue').on("input", function () {
-            $("td").each( function() {
-                if (this.innerText.includes($('#filtre-catalogue').val())) {
-                    console.log($(this).parent())
-                    // $(this).parent().css("display", "none");
+            $("tbody tr").each( function() {
+                if (!($("td", this).first().text().includes($('#filtre-catalogue').val()))) {
+                    $(this).css("display", "none");
+                } else {
+                    $(this).css("display", "table-row");
                 }
-                
-                
-                
             })
         })
         
