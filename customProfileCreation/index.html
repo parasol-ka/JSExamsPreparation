@@ -3,120 +3,117 @@
 <head>
     <meta charset="utf-8">
     <title>Examen JS – Formulaire de Profil</title>
-    <link rel="stylesheet" href="styles.css">
     <script src="jquery-3.7.1.min.js"></script>
     <style>
-        /* styles.css */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-}
+    .container {
+      background-color: #fff;
+      margin: 40px 0;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 320px;
+    }
 
-.container {
-  background-color: #fff;
-  margin: 40px 0;
-  padding: 20px 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  width: 320px;
-}
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
 
-h1 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  text-align: center;
-}
+    form div {
+      margin-bottom: 0.75rem;
+    }
 
-form div {
-  margin-bottom: 0.75rem;
-}
+    label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-weight: bold;
+    }
 
-label {
-  display: block;
-  margin-bottom: 0.25rem;
-  font-weight: bold;
-}
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    input[type="range"] {
+      width: 100%;
+      padding: 6px 8px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
 
-input[type="text"],
-input[type="email"],
-textarea,
-input[type="range"] {
-  width: 100%;
-  padding: 6px 8px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
+    input[type="range"] {
+      margin-top: 4px;
+    }
 
-input[type="range"] {
-  margin-top: 4px;
-}
+    #age-value {
+      font-weight: bold;
+    }
 
-#age-value {
-  font-weight: bold;
-}
+    input[type="radio"] {
+      margin-right: 4px;
+    }
 
-input[type="radio"] {
-  margin-right: 4px;
-}
+    button {
+      padding: 8px 12px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 8px;
+    }
 
-button {
-  padding: 8px 12px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 8px;
-}
+    button[type="submit"] {
+      background-color: #28a745;
+      color: #fff;
+    }
 
-button[type="submit"] {
-  background-color: #28a745;
-  color: #fff;
-}
+    button[type="reset"] {
+      background-color: #dc3545;
+      color: #fff;
+    }
 
-button[type="reset"] {
-  background-color: #dc3545;
-  color: #fff;
-}
+    button#edit-profile {
+      background-color: #007bff;
+      color: #fff;
+      margin-top: 1rem;
+    }
 
-button#edit-profile {
-  background-color: #007bff;
-  color: #fff;
-  margin-top: 1rem;
-}
+    button:hover {
+      opacity: 0.9;
+    }
 
-button:hover {
-  opacity: 0.9;
-}
+    .error {
+      color: #dc3545;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
 
-.error {
-  color: #dc3545;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-}
+    #profile-summary {
+      text-align: left;
+    }
 
-#profile-summary {
-  text-align: left;
-}
+    #profile-summary h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
 
-#profile-summary h2 {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-}
+    #profile-summary p {
+      margin: 0.5rem 0;
+    }
 
-#profile-summary p {
-  margin: 0.5rem 0;
-}
-
-    </style>
+</style>
 </head>
 <body>
     <div class="container">
@@ -124,11 +121,11 @@ button:hover {
         <form id="profile-form">
             <div>
                 <label for="username">Nom d’utilisateur :</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" >
             </div>
             <div>
                 <label for="email">Email :</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" >
             </div>
             <div>
                 <label for="age">Âge (<span id="age-value">25</span> ans) :</label>
@@ -136,7 +133,7 @@ button:hover {
             </div>
             <div>
                 <span>Genre :</span>
-                <label><input type="radio" name="gender" value="Homme" required> Homme</label>
+                <label><input type="radio" name="gender" value="Homme"> Homme</label>
                 <label><input type="radio" name="gender" value="Femme"> Femme</label>
                 <label><input type="radio" name="gender" value="Autre"> Autre</label>
             </div>
@@ -148,7 +145,6 @@ button:hover {
             <button type="reset">Effacer</button>
             <div id="form-message" class="error"></div>
         </form>
-
         <section id="profile-summary" style="display:none;">
             <h2>Résumé du Profil</h2>
             <p><strong>Utilisateur :</strong> <span id="sum-username"></span></p>
@@ -160,7 +156,83 @@ button:hover {
         </section>
     </div>
     <script>
-        // SCRIPT A COMPLETER
+        let profileData = {"Nom" : "", "Email" : "", "Age" : "", "Genre" : "", "Bio" : ""};
+
+        function stockerInputs() {
+            profileData["Nom"] = $('#username').val();
+            profileData["Email"] = $('#email').val();
+            profileData["Age"] = $('#age').prop("value");
+            profileData["Genre"] = ($('input[name="gender"]:checked')).attr?.("value") || ("");
+            profileData["Bio"] = $('#bio').val();
+        }
+        function verifierInputs() {
+            $('#form-message').html("")
+            if (profileData["Nom"] == "") {
+              $('#form-message').append('<p>Met le nom stp</p>')
+            }
+            if (profileData["Email"] == "") {
+              $('#form-message').append('<p>Met le email stp</p>')
+            }
+            if (profileData["Age"] == "") {
+              $('#form-message').append('<p>Met ton age stp</p>')
+            }
+            if (profileData["Genre"] == "") {
+              $('#form-message').append('<p>Choisi ton genre stp</p>')
+            }
+            if (profileData["Bio"] == "") {
+              $('#form-message').append('<p>Met le bio stp</p>')
+            }
+        }
+        function remplirSummary() {
+            $('#sum-username').text(profileData["Nom"]);
+            $('#sum-email').text(profileData["Email"]);
+            $('#sum-age').text(profileData["Age"]);
+            $('#sum-gender').text(profileData["Genre"]);
+            $('#sum-bio').text(profileData["Bio"])
+        }
+        function afficherSummary() {
+          if ($('#form-message').html() == "") {
+              $('#profile-summary').css('display', 'block');
+              $('#profile-form').css('display', 'none');
+              remplirSummary();
+          }
+        }
+        function remplirForm(avecDonnes) {
+          donnes = {"Nom" : "", "Email" : "", "Age" : "25", "Genre" : "", "Bio" : ""};
+          if (avecDonnes) {
+              donnes = profileData;
+          }
+          $('#username').val(donnes['Nom']);
+          $('#email').val(donnes['Email']);
+          $('#age').prop("value", donnes['Age']);
+          $('#age-value').text($('#age').prop("value"))
+          if (donnes["Genre"] != "") {
+              let genre = donnes["Genre"];
+              $(`input[name="gender"][value="${genre}"]`).prop('checked', true)
+          }else {
+              $('input[name="gender"]').prop('checked', false)
+          }
+          $('#bio').val(donnes['Bio']);
+        }
+        // On load
+        $( function () {
+            profileData = {"Nom" : "", "Email" : "", "Age" : "", "Genre" : "", "Bio" : ""};
+        })
+        // Events
+        $('#profile-form').on('submit', function() {
+            event.preventDefault();
+            stockerInputs();
+            verifierInputs();
+            afficherSummary();
+        })
+        $('input[id="age"]').on('input', function () {
+            $('#age-value').text($('#age').prop("value"))
+        })
+        $('#edit-profile').on('click', function () {
+            remplirForm(false);
+            $('#profile-summary').css('display', 'none');
+            $('#profile-form').css('display', 'block');
+        })
     </script>
 </body>
 </html>
