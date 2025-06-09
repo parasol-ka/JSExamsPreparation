@@ -1,0 +1,267 @@
+anastasiia
+parasol.ka
+Joue à Visual Studio Code
+
+Littl3T — 03-06-25 20:43
+/*****************************************************************
+ *  Yamaha RX-V520RDS – Émission brute de la trame VOL – (67 timings)
+ *
+ *  Câblage LED IR  (choisis UNE des deux options)
+ *  ----------------------------------------------------------------
+ *  A) LED entre D3 et GND  (anode → D3 via 100 Ω, cathode → GND)
+Afficher plus
+message.txt
+3 Ko
+Littl3T — 03-06-25 20:54
+/*****************************************************************
+ *  Pot-contrôleur Yamaha RX-V520RDS – émission 100 % RAW
+ *  ──────────────────────────────────────────────────────────────
+ *  • Potentiomètre 10 kΩ :  +5 V – A0 – GND
+ *  • LED IR 940 nm – choisis UNE des deux options :
+ *      A) anode → D3 via 100 Ω, cathode → GND
+Afficher plus
+message.txt
+5 Ko
+Littl3T — 03-06-25 21:08
+/*****************************************************************
+ *  Contrôleur Yamaha RX-V520RDS – version avec encodeur rotatif infini
+ *  • Encodeur à rotation continue + bouton poussoir (SW)
+ *  • LED IR 940 nm – choisis UNE des deux options :
+ *      A) anode → D3 via 100 Ω, cathode → GND  
+ *         → laisse IR_SEND_PIN_INVERTED commentée  
+Afficher plus
+message.txt
+6 Ko
+Littl3T — 03-06-25 22:04
+Image
+Littl3T — 03-06-25 22:12
+Image
+anastasiia — 03-06-25 22:15
+Littl3T
+ a commencé un appel qui a duré 3 heures. — 04-06-25 08:34
+Littl3T — 04-06-25 10:09
+Image
+anastasiia — 04-06-25 10:28
+Image
+Image
+Littl3T — 04-06-25 10:46
+Simon and Garfunkel Bridge over Troubled Water
+anastasiia — 04-06-25 11:27
+Le cours n’est pas parfait, mais c’est normal pour une première. Remarques : 1) éviter de dire que tout est facile, cela décourage ceux en difficulté ; 2) plus d’exemples et de corrections au tableau ; 3) être clair sur le format d'examen, car on nous a dit 30 min d'exercices après on discute, au final c'était presque que de la théorie à l'examen, ce qui est normal, juste il faut prévenir.
+Image
+Image
+Image
+anastasiia — 04-06-25 11:36
+Image
+Littl3T
+ a commencé un appel qui a duré 2 heures. — 04-06-25 11:55
+Littl3T — 04-06-25 11:58
++
+Image
+Littl3T — 04-06-25 12:08
+Image
+Littl3T — 04-06-25 12:25
+Image
+anastasiia — 04-06-25 12:29
+Image
+Littl3T — 04-06-25 13:33
+Image
+Littl3T — 04-06-25 15:21
+Gestion d'un panier en Js pour s'entrainer
+Type de fichier joint : archive
+ExamenCustom1.zip
+32.80 KB
+avec un input de form aussi du coup
+anastasiia — 04-06-25 15:47
+Cool
+anastasiia
+ a commencé un appel qui a duré 4 heures. — 04-06-25 18:39
+Littl3T — 04-06-25 18:41
+Objectif :
+ 
+Filtrer les produits selon le nom avec un refresh quand on tape les lettres dans l'input
+Ajout au panier et suppression
+Calcul du total du panier et nombre d'articles dynamiquement
+
+Au chargement :
+ Panier vide, #total-prix est à 0,00 et #nb-items à 0
+
+Au clic d'un ajouter au panier:
+ 
+Récupération du nom via la cellule et prix via attribut : data-prix
+Nombre d'article et prix à jours
+Nouveau élément <li> dans #panier-items avec le nom, prix et un <span class="supprimer-item">Supprimer</span> pour le supprimer du panier
+
+Au clic d'un supprimer du panier:
+ 
+Suppression du li
+Calcul du prix total et nombre item
+
+
+Au Remplissage de l'input de filtre des produits du catalogue:
+ 
+Afficher les lignes dont le nom correspond
+Ne pas afficher ceux qui ne correspondent pas.
+
+Exemple d'un article ajouté:
+<li>
+    T-shirt imprimé : 19,99 (3x) 
+    <span class="supprimer-item">Supprimer</span>
+</li>
+
+
+Bonne chance !
+Littl3T — 04-06-25 18:54
+Littl3T — 04-06-25 19:11
+Image
+Littl3T — 04-06-25 19:48
+$('#panier-items').append('<li>'+produit_nom+' : '+produit_prix+' (1x) <span class="supprimer-item">Supprimer</span> </li>') 
+Littl3T — 04-06-25 19:58
+$('blablabla')[0]
+$('blablabla','zzzz").first() 
+anastasiia — 04-06-25 20:14
+Image
+Image
+anastasiia — 04-06-25 20:37
+Image
+Littl3T — 04-06-25 21:13
+Image
+anastasiia — 04-06-25 21:28
+Image
+Littl3T — 04-06-25 21:36
+Image
+anastasiia — 04-06-25 21:43
+Image
+Littl3T — 04-06-25 22:01
+bof XD tu pense que pendant les vacanse tu serais m'aidé avec le web en css
+Littl3T — 04-06-25 22:19
+Image
+Littl3T — 04-06-25 22:31
+$(td, tr).first
+$('#filtre-catalogue').on('input',function(){
+            articles = $("tbody tr")
+            let valeur_filtre = $('#filtre-catalogue').val()
+            articles.each(function(index){
+                let produit = $('td',articles[index]).first().text()
+                if(!produit.includes(valeur_filtre)){
+                    articles[index].style.display = "none"
+                } else(articles[index].style.display = "table-row")
+            })
+        });
+Littl3T — 04-06-25 22:59
+anastasiia — 04-06-25 23:03
+Littl3T — 07-06-25 11:02
+Type de fichier joint : archive
+Examen Election.zip
+32.49 KB
+Littl3T — 07-06-25 11:15
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+Littl3T — 09:26
+Type de fichier joint : archive
+ExamenCustom2.zip
+32.12 KB
+Littl3T — 15:36
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examen JS - Lazy Scroll & Back to Top</title>
+Afficher plus
+index.html
+4 Ko
+﻿
+Littl3T
+littl3t
+Mélo/mane
+ 
+ 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examen JS - Lazy Scroll & Back to Top</title>
+  <style>
+    /* Layout général */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f0f0;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background: #333;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+      z-index: 1000;
+    }
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .section {
+      background: #fff;
+      margin: 2rem 0;
+      padding: 1rem;
+      border-radius: 8px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      display: none;
+      padding: 0.5rem 1rem;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+  <script src="jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Exercice Lazy Scroll</h1>
+  </header>
+
+  <main id="content">
+    <!-- Les sections seront générées ici -->
+  </main>
+
+  <button id="back-to-top">↑ Haut de page</button>
+
+  <script>
+    /* Instructions :
+     * 1. Au chargement, générer N sections (ex. N = 10) dans #content.
+     *    Chaque section aura la classe .section et un titre <h2>Section X</h2> et du contenu texte.
+     *
+     * 2. Implémenter le "lazy scroll" : lorsque chaque .section entre dans le viewport, lui ajouter la classe .visible 
+     *
+     * 3. Gérer l'événement de scroll :
+     *    - Afficher #back-to-top quand scrollTop > 300px, le masquer sinon.
+     *
+     * 4. Sur clic #back-to-top, animer le scroll vers le haut (800ms).
+     *
+     * Glhf
+     */
+    
+    
+    
+  </script>
+</body>
+</html>
