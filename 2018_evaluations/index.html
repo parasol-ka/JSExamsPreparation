@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Examen JavaScript - Étudiants</title>
+  <script src="jquery.min.js"></script>
+  <style>
+    body {
+    font-family: sans-serif;
+    padding: 20px;
+    background: #fff;
+    }
+    #formulaire {
+    margin-bottom: 20px;
+    }
+    #formulaire input {
+    padding: 10px;
+    font-size: 16px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 15%;
+    }
+    #formulaire input.erreur {
+    border-color: red;
+    background: #ffe6e6;
+    }
+    #ajouter {
+    padding: 10px 20px;
+    background: seagreen;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+    #zone-ajout {
+    position: relative;
+    height: 400px;
+    margin: 20px 0;
+    background: #f0f0f0;
+    border-radius: 8px;
+    overflow: hidden;
+    }
+    .etudiant {
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: #b9b4b4;
+    transition: all 0.3s;
+    width: max-content;
+    }
+    .note {
+        font-weight: bold;
+    }
+    .rouge {
+    background-color: #f8d7da !important;
+    color: #a94442;
+    }
+    .vert {
+    background-color: #d4edda !important;
+    color: #155724;
+    }
+    #panneau {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    }
+    #couleurs {
+    background: #5c4033;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    }
+    #stats {
+    display: flex;
+    gap: 10px;
+    }
+    #stats div {
+    background: #446d9e;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    }
+</style>
+</head>
+<body>
+    <form id="formulaire">
+        <input type="text" id="nom" placeholder="Nom de l'étudiant">
+        <input type="number" id="note" placeholder="Note /20" min="0" max="20">
+        <button id="ajouter" type="submit">Ajouter</button>
+    </form>
+
+    <div id="zone-ajout">
+        <!-- Les éléments étudiants seront ajoutés ici dynamiquement -->
+    </div>
+
+    <div id="panneau">
+        <div id="couleurs">Couleurs</div>
+        <div id="stats">
+        <div id="nombre">Nombre : 0</div>
+        <div id="moyenne">Moyenne : 0.0</div>
+        </div>
+    </div>
+    <script>
+        let etudiants = {};
+        let total = 0;
+        function verifierChamps() {
+            const nom = $('#nom').val().trim();
+            const note = parseFloat($('#note').val());
+            
+            const erreurNom = nom === "";
+            const erreurNote = isNaN(note) || note < 0 || note > 20;
+            
+            return { erreurNom, erreurNote };
+        }
+        function ajouterEtudiant() {
+            const { erreurNom, erreurNote } = verifierChamps();
+
+            $('#nom').toggleClass('rouge', erreurNom);
+            $('#note').toggleClass('rouge', erreurNote);
+
+            if (!erreurNom && !erreurNote) {
+                const nom = $('#nom').val().trim();
+                const note = parseInt($('#note').val());
+                etudiants[nom] = note;
+                $('#nom').val("");
+                $('#note').val("");
+            }
+        }
+        function afficherEtudiants() {
+            $('#zone-ajout').html("");
+            total = 0;
+            for (const etudiant in etudiants) {
+                let ecartLeft = etudiants[etudiant]*20;
+                $('#zone-ajout').append(`<div class="etudiant" style="margin-left : ${ecartLeft}px;""><span class="note">${etudiants[etudiant]}</span> ${etudiant}</div>`);
+                total += 1;
+            }
+            $('#nombre').text('Nombre : '+total)
+            calculerMoyenne();
+        }
+        function calculerMoyenne() {
+            let somme = 0;
+            console.log(total)
+            if (total>0) {
+                for (const etudiant in etudiants) {
+                    somme += etudiants[etudiant];
+                }
+                let moyenne = (somme/total).toFixed(1);
+                $('#moyenne').text('Moyenne : '+moyenne);
+            }
+        }
+        // Events 
+        $('#formulaire').on('submit', function () {
+            event.preventDefault();
+            ajouterEtudiant();
+            afficherEtudiants();
+        })
+        $('#couleurs').on('mouseover', function () {
+            $('.etudiant').each(function() {
+                let note = $('.note', this).text();
+                if (note>9) {
+                    $(this).addClass('vert')
+                }else {
+                    $(this).addClass('rouge')
+                }
+            })
+        })
+        $('#couleurs').on('mouseleave', function () {
+            $('.etudiant').removeClass('vert')
+            $('.etudiant').removeClass('rouge')
+        })
+    </script>
+</body>
+</html>

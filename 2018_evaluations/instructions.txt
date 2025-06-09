@@ -1,6 +1,6 @@
 Examen de JavaScript et jQuery
 
-Le sujet est une interface permettant d'encoder des noms d'étudiants et leurs points.
+Le sujet est une interface permettant d'encoder des noms d'ï¿½tudiants et leurs points.
 
 Au chargement de la page,
 La page comporte un champ texte (pour le nom), un champ nombre (pour la cote), un bloc "Ajouter" cliquable, un bloc central tout vide (on ne le voit pas), un bloc "Couleurs" survolable et un bloc "Nombre".
@@ -8,12 +8,15 @@ La page comporte un champ texte (pour le nom), un champ nombre (pour la cote), u
 Lors du clic sur "Ajouter",
 Si le champ nombre a une valeur non vide et non comprise entre 0 et 20, le champ nombre devient rouge.
 Sinon, le champ nombre devient blanc et on teste le nom :
-	Si le champ texte n'est pas vide, un élément contenant la cote et le nom de l'étudiant est ajouté au bloc central ; cet élément est animé pour s'écarter du bord gauche d'un nombre de pixels valant 20 fois sa cote ; puis les champs texte et nombre sont vidés ; puis le nombre d'étudiants est incrémenté et affiché dans le bloc "Nombre".
+	Si le champ texte n'est pas vide, un ï¿½lï¿½ment contenant la cote et le nom de l'ï¿½tudiant est ajoutï¿½ au bloc central ; 
+	cet ï¿½lï¿½ment est animï¿½ pour s'ï¿½carter du bord gauche d'un nombre de pixels valant 20 fois sa cote ; 
+	puis les champs texte et nombre sont vidï¿½s ; 
+	puis le nombre d'ï¿½tudiants est incrï¿½mentï¿½ et affichï¿½ dans le bloc "Nombre".
 
 Lors du survol du bloc "Couleurs",
-Tous les éléments contenant des cotes et des noms d'étudiants se colorient : en rouge les cotes inférieures à 10/20, en vert les autres.
+Tous les ï¿½lï¿½ments contenant des cotes et des noms d'ï¿½tudiants se colorient : en rouge les cotes infï¿½rieures ï¿½ 10/20, en vert les autres.
 
-Lorsqu'on arrête de survoler le bloc "Couleurs", 
-Tous les éléments redeviennent gris clair.
+Lorsqu'on arrï¿½te de survoler le bloc "Couleurs", 
+Tous les ï¿½lï¿½ments redeviennent gris clair.
 
 
